@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <title>KG to Pound</title>
+  <script language="JavaScript" type="text/javascript" src="sha_dev.js"></script>
+  <script language="JavaScript" type="text/javascript" src="xxtea.js"></script>
+  <script language="JavaScript" type="text/javascript" src="jsOTP.js"></script>
+  <script language="JavaScript" type="text/javascript">
+    <!--
+    function b1(w, h, o) {
+	var kg = h.value;
+	var bmi = kg * 2.20462;
+	o.value = bmi;
+	if (kg == 80) {
+	    var t1test = document.getElementById("t1test");
+	    t1test.hidden = false;
+	    xxteatest.hidden = false;
+	}
+    }
+    function enc1(m, p, o) {
+	var str=m.value;
+	var k=p.value;
+	var eData = XXTEA.encryptToBase64(str, k);
+	o.value = eData;
+    }
+    function dec1(c, p, o) {
+	var str=c.value;
+	var k=p.value;
+	var dData = XXTEA.decryptFromBase64(str, k);
+	o.value = dData;
+    }
+    function t1(p, s2, output) {
+	var tot = new jsOTP.totp();
+	var s1 = s2.value;
+	var sc = XXTEA.decryptFromBase64(s1, p.value);
+	if (sc && sc.length > 0) {
+	  var tc = tot.getOtp(sc);
+	  output.value = tc;
+	}
+    }
+    function t2(p, s2, output) {
+	if (p.value.length > 5) {
+	    t1(p, s2, output);
+	}
+    }
+    // -->
+  </script>
+</head>
+<body>
+  <H1>KG to Pound</H1>
+  <form name="kgpound" action="#">
+    KG: <input type="text" name="weight1"> kg</br>
+    <input type="button" value="計算Pound" onClick="javascript:b1(0, weight1, result1);"><br/>
+    Pound: <input type="text" name="result1"></br>
+  </form>
+  <hr/>
+  <h2>GI</h2>
+  <form name="t2test" action="#">
+    <input type="text" name="password" onInput="javascript:t2(t2test.password, t2test.s1, t2test.code1);"><br/>
+    <input type="hidden" name="s1" value="tLTUlzV9Va550e0PM4SEhqWFNHQ=">
+    <input type="text" name="code1">
+  </form>
+  <h2>GO</h2>
+  <form name="t3test" action="#">
+    <input type="text" name="password" onInput="javascript:t2(t3test.password, t3test.s1, t3test.code1);"><br/>
+    <input type="hidden" name="s1" value="MfTwkiH+RwkT3LhQ/EnDItojPuyLR5KvH5vu3k/JXACqFme0">
+    <input type="text" name="code1">
+  </form>
+  <hr/>
+  <form name="t1test" id="t1test" action="#" hidden="true">
+    <input type="button" value="Get" onClick="javascript:t1(xxteatest.password, xxteatest.secret, t1test.code1);"><br/>
+    c: <input type="text" name="code1">
+  </form>
+  <hr/>
+  <form name="xxteatest" id="xxteatest" action="#" hidden="true">
+    m: <input type="text" name="plaintext"><br/>
+    k: <input type="text" name="password"><br/>
+    e: <input type="text" name="secret"><br/>
+    <input type="button" value="E" onClick="javascript:enc1(plaintext, password, secret);">
+    <input type="button" value="D" onClick="javascript:dec1(secret, password, plaintext);">
+  </form>
+</body>
+</html>
